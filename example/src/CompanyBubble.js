@@ -16,14 +16,15 @@ export default function CompanyBubble(props) {
         // transform: `scale(${props.maxSize / 200})`
       }}
     >
-      {props.bubbleSize > 50 ? (
+      {true ? (
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            opacity: true ? 1 : 0,
+            transition: "opacity 0.1s ease",
+            opacity: props.bubbleSize > 50 ? 1 : 0,
           }}
         >
           <img

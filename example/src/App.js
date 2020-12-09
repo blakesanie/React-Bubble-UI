@@ -21,7 +21,7 @@ for (var i = 0; i < 200; i++) {
 
 export default function App(props) {
   const getStockBubbles = () => {
-    return companyData.slice(0, 45).map((company, i) => {
+    return companyData.slice(0, 44).map((company, i) => {
       return <CompanyBubble {...company} key={i} />;
     });
   };
@@ -35,6 +35,8 @@ export default function App(props) {
         options={{
           showGuides: true,
           provideProps: true,
+          gravitation: 5,
+          compact: true,
         }}
       >
         {stockBubbles}
