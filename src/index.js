@@ -6,14 +6,13 @@ export default function BubbleElement(props) {
     size: 200,
     minSize: 10,
     translationFactor: 0,
-    gutter: 40,
+    gutter: 10,
     provideProps: false,
     numCols: 5,
     fringeWidth: 100,
-    shape: "ellipse",
     yRadius: 200,
     xRadius: 200,
-    cornerRadius: 100,
+    cornerRadius: 200,
     showGuides: false,
   };
   Object.assign(options, props.options);
@@ -21,36 +20,17 @@ export default function BubbleElement(props) {
   // console.log(options);
 
   const minProportion = options.minSize / options.size;
-  const shapeFactor =
-    options.shape == "ellipse" ? (options.size + options.gutter) * 0.3 : 0;
-  const cornerFactor =
-    options.shape == "ellispe" ? 0 : options.cornerRadius / 3;
 
-  let verticalPadding, horizontalPadding;
-
-  if (options.shape == "ellipse") {
-    verticalPadding = `calc(50% - ${
-      options.yRadius +
-      options.size / 2 -
-      (options.yRadius * (1.414 - 1)) / 1.414
-    }px)`;
-    horizontalPadding = `calc(50% - ${
-      options.xRadius +
-      options.size / 2 -
-      (options.xRadius * (1.414 - 1)) / 1.414
-    }px)`;
-  } else {
-    verticalPadding = `calc(50% - ${
-      options.yRadius +
-      options.size / 2 -
-      (options.cornerRadius * (1.414 - 1)) / 1.414
-    }px)`;
-    horizontalPadding = `calc(50% - ${
-      options.xRadius +
-      options.size / 2 -
-      (options.cornerRadius * (1.414 - 1)) / 1.414
-    }px)`;
-  }
+  const verticalPadding = `calc(50% - ${
+    options.yRadius +
+    options.size / 2 -
+    (options.cornerRadius * (1.414 - 1)) / 1.414
+  }px)`;
+  const horizontalPadding = `calc(50% - ${
+    options.xRadius +
+    options.size / 2 -
+    (options.cornerRadius * (1.414 - 1)) / 1.414
+  }px)`;
 
   const container = useRef(null);
 
@@ -117,76 +97,78 @@ export default function BubbleElement(props) {
     );
   };
 
-  const getRadiusOfEllipseForPosition = (x, y, a, b) => {
-    x = Math.abs(x);
-    y = Math.abs(y);
-    if (x > a || y > b) {
-      return 0;
-    }
-    const theta = Math.atan(y / x);
-    const sin = Math.sin(theta);
-    const cos = Math.cos(theta);
-    return (a * b) / Math.sqrt(a * a * sin * sin + b * b * cos * cos);
-    // if (x * x > a * a) {
-    //   return 0;
-    // }
-    // const ySquared = (a * a * b * b - x * x * b * b) / (a * a);
-    // return Math.sqrt(ySquared + x * x);
-  };
-
   const getBubbleSize = (row, col) => {
-    let xOffset, yOffset;
-    if (options.shape == "ellipse") {
-      yOffset =
-        (options.size + options.gutter) * 0.866 * row - options.yRadius / 1.414;
-      xOffset =
-        (options.size + options.gutter) * col +
-        ((options.numCols - rows[row].length) *
-          (options.size + options.gutter)) /
-          2 -
-        options.xRadius / 1.414;
-    } else {
-    }
+    const yOffset =
+      (options.size + options.gutter) * 0.866 * row -
+      options.size +
+      (options.cornerRadius * (1.414 - 1)) / 1.414;
+    //  - options.cornerRadius / 1.414;
+    const xOffset =
+      (options.size + options.gutter) * col +
+      ((options.numCols - rows[row].length) * (options.size + options.gutter)) /
+        2 -
+      options.size +
+      (options.cornerRadius * (1.414 - 1)) / 1.414;
+    // - options.cornerRadius / 1.414;
     const dy = yOffset - scrollTop;
     const dx = xOffset - scrollLeft;
     const distance = Math.sqrt(dx * dx + dy * dy);
+    let theta = Math.atan(dy / dx);
+    if (dx < 0) theta += Math.PI;
     let out = {
       bubbleSize: 1,
       translateX: 0,
       translateY: 0,
-      distance: distance,
+      distance: `${Math.round(dx)}, ${Math.round(dy)}`,
     };
-
-    if (options.shape == "ellipse") {
-      let rad = getRadiusOfEllipseForPosition(
-        dx,
-        dy,
-        options.xRadius,
-        options.yRadius
-      );
-      console.log(rad);
-      if (distance > rad) {
-        // size is already 1 by default
-        rad = getRadiusOfEllipseForPosition(
-          dx,
-          dy,
-          options.xRadius + options.fringeWidth,
-          options.yRadius + options.fringeWidth
+    let distanceFromEdge = 0;
+    // console.log(Math.abs(dx));
+    if (Math.abs(dx) <= options.xRadius && Math.abs(dy) <= options.yRadius) {
+      if (
+        Math.abs(dy) > options.yRadius - options.cornerRadius &&
+        Math.abs(dx) > options.xRadius - options.cornerRadius
+      ) {
+        const distToInnerCorner = Math.sqrt(
+          Math.pow(Math.abs(dy) - options.yRadius + options.cornerRadius, 2) +
+            Math.pow(Math.abs(dx) - options.xRadius + options.cornerRadius, 2)
         );
-        if (distance <= rad) {
-          out.bubbleSize = interpolate(
-            rad - options.fringeWidth,
-            rad,
-            distance,
-            1,
-            minProportion
-          );
-        } else {
-          out.bubbleSize = minProportion;
+        if (distToInnerCorner > options.cornerRadius) {
+          distanceFromEdge = distToInnerCorner - options.cornerRadius;
         }
       }
+    } else if (
+      Math.abs(dx) <= options.xRadius + options.fringeWidth &&
+      Math.abs(dy) <= options.yRadius + options.fringeWidth
+    ) {
+      if (
+        Math.abs(dy) > options.yRadius - options.cornerRadius &&
+        Math.abs(dx) > options.xRadius - options.cornerRadius
+      ) {
+        const distToInnerCorner = Math.sqrt(
+          Math.pow(Math.abs(dy) - options.yRadius + options.cornerRadius, 2) +
+            Math.pow(Math.abs(dx) - options.xRadius + options.cornerRadius, 2)
+        );
+        distanceFromEdge = Math.min(
+          distToInnerCorner - options.cornerRadius,
+          options.fringeWidth
+        );
+      } else {
+        distanceFromEdge = Math.max(
+          Math.abs(dx) - options.xRadius,
+          Math.abs(dy) - options.yRadius
+        );
+      }
     } else {
+      distanceFromEdge = options.fringeWidth;
     }
+
+    out.bubbleSize = interpolate(
+      0,
+      options.fringeWidth,
+      distanceFromEdge,
+      1,
+      minProportion
+    );
 
     return out;
     // const yOffset = (options.size * 0.866 + options.gutter) * row - innerRadius / 1.414

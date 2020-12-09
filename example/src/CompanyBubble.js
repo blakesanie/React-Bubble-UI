@@ -43,7 +43,7 @@ export default function CompanyBubble(props) {
               fontWeight: 1000,
             }}
           >
-            {props.symbol}
+            {props.distanceToCenter}
           </p>
           <p
             style={{

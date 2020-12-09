@@ -35,13 +35,6 @@ export default function App(props) {
         options={{
           showGuides: true,
           provideProps: true,
-          gutter: 8,
-          size: 180,
-          numCols: 8,
-          fringeWidth: 150,
-          shape: "ellipse",
-          xRadius: 100,
-          yRadius: 300,
         }}
       >
         {stockBubbles}
