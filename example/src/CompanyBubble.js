@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function CompanyBubble(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <div
       style={{
@@ -16,7 +16,7 @@ export default function CompanyBubble(props) {
         // transform: `scale(${props.maxSize / 200})`
       }}
     >
-      {true ? (
+      {props.bubbleSize > 50 ? (
         <div
           style={{
             display: "flex",
@@ -43,7 +43,7 @@ export default function CompanyBubble(props) {
               fontWeight: 1000,
             }}
           >
-            {props.distanceToCenter}
+            {props.symbol}
           </p>
           <p
             style={{

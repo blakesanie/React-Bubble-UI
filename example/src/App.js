@@ -21,7 +21,7 @@ for (var i = 0; i < 200; i++) {
 
 export default function App(props) {
   const getStockBubbles = () => {
-    return companyData.slice(0, 27).map((company, i) => {
+    return companyData.slice(0, 45).map((company, i) => {
       return <CompanyBubble {...company} key={i} />;
     });
   };
@@ -32,18 +32,17 @@ export default function App(props) {
       <h2>First seen on Apple Watch, now avaible for your Web App</h2>
       <BubbleUI
         className="bubbleUI"
-        options={{ showGuides: true, provideProps: true, size: 100 }}
-        resize
-        shouldTranslate
-        roundCorners={false}
-        gutter={8}
-        width={Math.floor(Math.sqrt(stockBubbles.length) * 1.2)}
-        size={20}
-        minSize={20}
-        innerRadius={150}
-        outerRadius={300}
-        translationFactor={0.42}
-        provideProps={true}
+        options={{
+          showGuides: true,
+          provideProps: true,
+          gutter: 8,
+          size: 180,
+          numCols: 8,
+          fringeWidth: 150,
+          shape: "ellipse",
+          xRadius: 100,
+          yRadius: 300,
+        }}
       >
         {stockBubbles}
       </BubbleUI>
