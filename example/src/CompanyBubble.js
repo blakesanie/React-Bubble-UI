@@ -1,37 +1,38 @@
-import React from 'react'
+import React from "react";
 
 export default function CompanyBubble(props) {
+  console.log(props);
   return (
     <div
       style={{
-        backgroundColor: props.backgroundColor + 'd0',
+        backgroundColor: props.backgroundColor + "d0",
         borderRadius: `50%`,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        cursor: 'pointer',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
         width: `100%`,
-        height: `100%`
+        height: `100%`,
         // transform: `scale(${props.maxSize / 200})`
       }}
     >
       {true ? (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            opacity: props.bubbleSize > 60 ? 1 : 0
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            opacity: true ? 1 : 0,
           }}
         >
           <img
             src={`/companyLogos/${props.symbol}.svg`}
-            alt=''
+            alt=""
             style={{
               width: 40,
               borderRadius: `50%`,
-              marginBottom: 8
+              marginBottom: 8,
             }}
           ></img>
           <p
@@ -39,10 +40,10 @@ export default function CompanyBubble(props) {
               color: props.textColor,
               fontSize: 18,
               marginBottom: 4,
-              fontWeight: 1000
+              fontWeight: 1000,
             }}
           >
-            {props.symbol}
+            {props.distanceToCenter}
           </p>
           <p
             style={{
@@ -50,8 +51,8 @@ export default function CompanyBubble(props) {
               fontSize: 12,
               marginBottom: 10,
               maxWidth: 100,
-              textAlign: 'center',
-              opacity: 0.5
+              textAlign: "center",
+              opacity: 0.5,
             }}
           >
             {props.name}
@@ -59,5 +60,5 @@ export default function CompanyBubble(props) {
         </div>
       ) : null}
     </div>
-  )
+  );
 }
