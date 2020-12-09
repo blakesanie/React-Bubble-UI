@@ -13,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #f9f9f9;
+  height: 300vh;
 }
 
 .bubbleUI {
@@ -20,7 +21,7 @@
   background-color: rgba(0, 0, 0, 0) !important;
   width: 100%;
   max-width: 1000px;
-  height: 1000px;
+  height: 600px;
   border-radius: 30px;
   margin: 40px 0;
   background-color: white !important;

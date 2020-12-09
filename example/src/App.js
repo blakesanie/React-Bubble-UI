@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useLayoutEffect } from "react";
 
 import BubbleUI from "bubble-ui";
 import "bubble-ui/dist/index.css";
@@ -21,11 +21,24 @@ for (var i = 0; i < 200; i++) {
 
 export default function App(props) {
   const getStockBubbles = () => {
-    return companyData.slice(0, 44).map((company, i) => {
+    return companyData.slice(0, 27).map((company, i) => {
       return <CompanyBubble {...company} key={i} />;
     });
   };
   const stockBubbles = getStockBubbles();
+
+  const [pageWidth, setPageWidth] = useState(window.innerWidth);
+
+  const handleResize = (e) => {
+    setPageWidth(window.innerWidth);
+  };
+
+  useLayoutEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <React.Fragment>
       <h1>React-Bubble-Layout</h1>
@@ -37,6 +50,11 @@ export default function App(props) {
           provideProps: true,
           gravitation: 5,
           compact: true,
+          size: 160,
+          yRadius: 200,
+          xRadius: Math.min((pageWidth - 300) / 2, 400),
+          fringeWidth: 80,
+          numCols: 6,
         }}
       >
         {stockBubbles}

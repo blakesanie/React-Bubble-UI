@@ -34,7 +34,7 @@ export default function BubbleElement(props) {
     (options.cornerRadius * (1.414 - 1)) / 1.414
   }px)`;
 
-  const container = useRef(null);
+  const scrollable = useRef(null);
 
   let rows = [];
   var colsRemaining = 0;
@@ -71,25 +71,13 @@ export default function BubbleElement(props) {
   // }
 
   useLayoutEffect(() => {
-    window.addEventListener("scroll", handleScroll, true);
-    // window.addEventListener('resize', handleResize, true)
-    // container.current.scrollTo(
-    //   container.current.offsetWidth / 2 +
-    //     (size * numCols +
-    //       gutter * (numCols - 1) -
-    //       container.current.offsetWidth) /
-    //       2 -
-    //     innerRadius / 1.414 -
-    //     size / 2,
-    //   container.current.offsetHeight / 2 +
-    //     (size * 0.866 * rows.length +
-    //       gutter * (rows.length - 1) -
-    //       container.current.offsetHeight) /
-    //       2 -
-    //     innerRadius / 1.414 -
-    //     size / 2 +
-    //     gutter
-    // )
+    window.addEventListener("scroll", handleScroll);
+
+    scrollable.current.scrollTo(
+      (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
+      (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2
+    );
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const interpolate = (actualMin, actualMax, val, targetMin, targetMax) => {
@@ -257,55 +245,7 @@ export default function BubbleElement(props) {
       }
     }
 
-    // if (
-    //   isInCornerRegion &&
-    //   distanceFromEdge > 0 &&
-    //   distanceFromEdge <= options.fringeWidth
-    // ) {
-    // } else if (
-    //   distanceFromEdge > 0 &&
-    //   distanceFromEdge <= options.fringeWidth
-    // ) {
-    //   if (Math.abs(dx) > options.xRadius) {
-    //     out.translateX = translationMag * -Math.sign(dx);
-    //   } else {
-    //     out.translateY = translationMag * -Math.sign(dy);
-    //   }
-    // }
-
     return out;
-    // const yOffset = (options.size * 0.866 + options.gutter) * row - innerRadius / 1.414
-    // const xOffset =
-    //   (size + gutter) * col +
-    //   ((numCols - rows[row].length) * size) / 2 -
-    //   innerRadius / 1.414
-
-    // const dy = yOffset - scrollTop
-    // const dx = xOffset - scrollLeft
-    // const distance = Math.sqrt(dx * dx + dy * dy)
-    // if (distance < innerRadius) {
-    //   return {
-    //     bubbleSize: 1,
-    //     translateX: 0,
-    //     translateY: 0,
-    //     distance: distance
-    //   }
-    // }
-    // let theta = Math.atan(dy / dx)
-    // if (dx < 0) theta += Math.PI
-    // return {
-    //   bubbleSize:
-    //     distance < outerRadius
-    //       ? 1 -
-    //         ((distance - innerRadius) / (outerRadius - innerRadius)) *
-    //           (1 - minProportion)
-    //       : minProportion,
-    //   translateX:
-    //     -(distance - innerRadius) * Math.cos(theta) * translationFactor,
-    //   translateY:
-    //     -(distance - innerRadius) * Math.sin(theta) * translationFactor,
-    //   distance: distance
-    // }
   };
 
   return (
@@ -318,10 +258,10 @@ export default function BubbleElement(props) {
       }}
       style={props.style}
     >
-      <div className={styles.container} onScroll={handleScroll} ref={container}>
+      <div className={styles.container} onScroll={handleScroll}>
         <p>{`scrollTop: ${scrollTop}`}</p>
         <p>{`scrollLeft: ${scrollLeft}`}</p>
-        <div className={styles.scrollable}>
+        <div className={styles.scrollable} ref={scrollable}>
           <div
             className={styles.horizontalSpacer}
             style={{
