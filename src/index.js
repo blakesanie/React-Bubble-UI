@@ -1,21 +1,27 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
 import styles from "./styles.module.css";
 
+export const defaultOptions = {
+  size: 200,
+  minSize: 20,
+  gutter: 16,
+  provideProps: false,
+  numCols: 6,
+  fringeWidth: 100,
+  yRadius: 200,
+  xRadius: 200,
+  cornerRadius: 100,
+  showGuides: false,
+  compact: false,
+  gravitation: 0,
+};
+
 export default function BubbleElement(props) {
-  let options = {
-    size: 200,
-    minSize: 20,
-    gutter: 16.5,
-    provideProps: false,
-    numCols: 6,
-    fringeWidth: 100,
-    yRadius: 200,
-    xRadius: 200,
-    cornerRadius: 100,
-    showGuides: false,
-    compact: false,
-    gravitation: 0,
-  };
+  if (!props.children) {
+    return null;
+  }
+  let options = {};
+  Object.assign(options, defaultOptions);
   Object.assign(options, props.options);
   options.numCols = Math.min(options.numCols, props.children.length);
   // console.log(options);
@@ -110,7 +116,7 @@ export default function BubbleElement(props) {
       bubbleSize: 1,
       translateX: 0,
       translateY: 0,
-      distance: `${Math.round(dx)}, ${Math.round(dy)}`,
+      distance: distance,
     };
     let distanceFromEdge = 0;
     let isInCornerRegion = false;
@@ -175,8 +181,6 @@ export default function BubbleElement(props) {
         );
       }
     }
-
-    out.distance = `${Math.round(distanceFromEdge - options.fringeWidth)}`;
 
     out.bubbleSize = interpolate(
       0,

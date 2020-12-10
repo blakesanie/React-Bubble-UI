@@ -9,8 +9,24 @@
   font-weight: 400;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-align: center;
+  line-height: 150%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #f8f8f8;
+  padding: 0 40px;
 }
 
 #root {
@@ -38,24 +54,55 @@ body {
 
 h1 {
   font-size: 40px;
-  margin-top: 40px;
+  margin-top: 50px;
   width: 100%;
   text-align: center;
   font-weight: 1000;
 }
 h2 {
   font-size: 20px;
-  margin-top: 4px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 40px;
   width: 100%;
   text-align: center;
 }
 
+.actionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.action {
+  background-color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  border-radius: 14px;
+  color: black;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+
+.action:hover {
+  transform: scale(1.05);
+}
+
+.action img {
+  height: 30px;
+  margin-left: 10px;
+}
+
 h3 {
-  margin: 22px 0;
+  margin: 30px 0;
   font-size: 20px;
   font-weight: 1000;
-  opacity: 0.5;
+  text-align: center;
 }
 /* 
 .container {
@@ -73,6 +120,7 @@ h3 {
   cursor: pointer;
   width: 100%;
   height: 100%;
+  transition: opacity 0.1s ease;
 }
 
 .companyBubble:hover {
@@ -134,4 +182,108 @@ h3 {
 
 .bottom input[type="range"] {
   width: 100%;
+}
+
+.install {
+  width: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.codeBlock {
+  width: 100%;
+  max-width: 500px;
+}
+
+h4 {
+  margin-top: 120px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.propDesc {
+  font-size: 20px;
+
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 80px;
+}
+
+.comparisonBubbleUI {
+  height: 400px;
+  width: 400px;
+  border-radius: 50px;
+  background-color: white !important;
+  overflow: hidden !important;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+.dummyBubble {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dummyBubbleText {
+  font-size: 17px;
+}
+
+.optionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.optionName {
+  font-size: 30px;
+  font-weight: 1000;
+  margin-bottom: 6px;
+}
+
+.optionName span {
+  font-weight: 0;
+  opacity: 0.5;
+}
+
+.optionDefault {
+  opacity: 0.5;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.optionDesc {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.comparisonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.beforeContainer,
+.afterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.comparisonText {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
