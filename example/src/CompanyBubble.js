@@ -6,15 +6,8 @@ export default function CompanyBubble(props) {
     <div
       style={{
         backgroundColor: props.backgroundColor + "d0",
-        borderRadius: `50%`,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
-        width: `100%`,
-        height: `100%`,
-        // transform: `scale(${props.maxSize / 200})`
       }}
+      className={"companyBubble"}
     >
       {true ? (
         <div
@@ -25,38 +18,40 @@ export default function CompanyBubble(props) {
             flexDirection: "column",
             transition: "opacity 0.1s ease",
             opacity: props.bubbleSize > 50 ? 1 : 0,
+            pointerEvents: "none",
           }}
         >
           <img
             src={`/companyLogos/${props.symbol}.svg`}
             alt=""
             style={{
-              width: 40,
+              width: 50,
               borderRadius: `50%`,
-              marginBottom: 8,
+              marginBottom: 10,
             }}
           ></img>
           <p
             style={{
               color: props.textColor,
-              fontSize: 18,
-              marginBottom: 4,
+              fontSize: 14,
+              marginBottom: 6,
               fontWeight: 1000,
+              maxWidth: 150,
+              textAlign: "center",
             }}
           >
-            {props.distanceToCenter}
+            {props.name}
           </p>
           <p
             style={{
               color: props.textColor,
-              fontSize: 12,
-              marginBottom: 10,
+              fontSize: 14,
+              marginBottom: 5,
               maxWidth: 100,
-              textAlign: "center",
               opacity: 0.5,
             }}
           >
-            {props.name}
+            {props.symbol}
           </p>
         </div>
       ) : null}

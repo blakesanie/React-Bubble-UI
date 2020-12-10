@@ -5,7 +5,6 @@ export default function BubbleElement(props) {
   let options = {
     size: 200,
     minSize: 20,
-    translationFactor: 0,
     gutter: 16.5,
     provideProps: false,
     numCols: 6,
@@ -259,8 +258,8 @@ export default function BubbleElement(props) {
       style={props.style}
     >
       <div className={styles.container} onScroll={handleScroll}>
-        <p>{`scrollTop: ${scrollTop}`}</p>
-        <p>{`scrollLeft: ${scrollLeft}`}</p>
+        {/* <p>{`scrollTop: ${scrollTop}`}</p>
+        <p>{`scrollLeft: ${scrollLeft}`}</p> */}
         <div className={styles.scrollable} ref={scrollable}>
           <div
             className={styles.horizontalSpacer}
@@ -306,27 +305,17 @@ export default function BubbleElement(props) {
                           height: options.size,
                           marginRight: options.gutter / 2,
                           marginLeft: options.gutter / 2,
-                          transform: `translateX(${translateX}px) translateY(${translateY}px)`,
+                          transform: `translateX(${translateX}px) translateY(${translateY}px) scale(${bubbleSize})`,
                         }}
                       >
-                        <div
-                          className={styles.bubble}
-                          style={{
-                            width: `100%`,
-                            height: `100%`,
-                            transform: `scale(${bubbleSize})`,
-                            borderRadius: `50%`,
-                          }}
-                        >
-                          {options.provideProps
-                            ? React.cloneElement(comp, {
-                                bubbleSize: bubbleSize * options.size,
-                                distanceToCenter: distance,
-                                maxSize: options.size,
-                                minSize: options.minSize,
-                              })
-                            : comp}
-                        </div>
+                        {options.provideProps
+                          ? React.cloneElement(comp, {
+                              bubbleSize: bubbleSize * options.size,
+                              distanceToCenter: distance,
+                              maxSize: options.size,
+                              minSize: options.minSize,
+                            })
+                          : comp}
                       </div>
                     );
                   })}
