@@ -16,13 +16,13 @@ npm install --save react-bubble-ui
 
 Interact with a live demo to configure to UI to your liking.
 
-[**Experience Demo**](blakesanie.github.io/React-Bubble-UI)
+[**Experience Demo**](https://blakesanie.github.io/React-Bubble-UI)
 
 ## Thorough Documentation
 
 Understand how to apply the component's high confirgurability to your design.
 
-[**Read Docs**](blakesanie.github.io/React-Bubble-UI)
+[**Read Docs**](https://blakesanie.github.io/React-Bubble-UI)
 
 ## Contributing
 
@@ -39,7 +39,7 @@ I highly encourage you to help improve this package further through the followin
 
 This package was created by [Blake Sanie](https://github.com/blakesanie) in 2020.
 
-Like what you see? [View his other projects 📱 ](blakesanie.com/cs), [read his blog 💻 ](blakesanie.medium.com), or [buy him a coffee ☕](https://paypal.me/blakesanie?locale.x=en_US).
+Like what you see? [View his other projects 📱 ](https://blakesanie.com/cs), [read his blog 💻 ](https://blakesanie.medium.com), or [buy him a coffee ☕](https://paypal.me/blakesanie?locale.x=en_US).
 
 ## License
 

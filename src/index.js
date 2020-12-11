@@ -357,7 +357,7 @@ export default function BubbleElement(props) {
                     : options.cornerRadius + options.fringeWidth,
               }}
             ></div>
-            <div
+            {/* <div
               style={{
                 position: "absolute",
                 height: `100%`,
@@ -376,7 +376,7 @@ export default function BubbleElement(props) {
                 top: `50%`,
                 left: 0,
               }}
-            ></div>
+            ></div> */}
           </div>
         ) : null}
       </div>

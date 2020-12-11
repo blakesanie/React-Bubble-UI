@@ -21,48 +21,22 @@ const dummyBubbleLayoutOptions = {
   gravitation: 5,
 };
 
-const dummyColors = [
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-  "#F79256",
-  "#FBD1A2",
-  "#7DCFB6",
-  "#00B2CA",
-  "#1D4E89",
-];
+const dimensionsExampleOptions = {
+  size: 120,
+  minSize: 14,
+  gutter: 8,
+  provideProps: false,
+  numCols: 7,
+  fringeWidth: 100,
+  yRadius: 120,
+  xRadius: 160,
+  cornerRadius: 60,
+  showGuides: true,
+  compact: false,
+  gravitation: 0,
+};
+
+const dummyColors = ["#F79256", "#FBD1A2", "#7DCFB6", "#00B2CA", "#1D4E89"];
 
 export default function App(props) {
   const controls = [
@@ -258,7 +232,9 @@ export default function App(props) {
   const getDummyBubbles = () => {
     let out = [];
     for (var i = 0; i < 30; i++) {
-      out.push(<DummyBubble color={dummyColors[i]} key={i} />);
+      out.push(
+        <DummyBubble color={dummyColors[i % dummyColors.length]} key={i} />
+      );
     }
     return out;
   };
@@ -429,8 +405,176 @@ export default function App(props) {
           codeBlock
         />
       </div>
+      <h4>Understanding Layout Dimensions</h4>
+      <div className="dimensionsBubbleUI">
+        <BubbleUI
+          className="dimensionsBubbleUI"
+          options={dimensionsExampleOptions}
+        >
+          {dummyBubbles}
+        </BubbleUI>
+        <p
+          className="dimensionLabel"
+          style={{
+            bottom: `50%`,
+            left: `50%`,
+            width: dimensionsExampleOptions.xRadius,
+            borderBottom: `2px solid white`,
+          }}
+        >
+          xRadius
+        </p>
+        <p
+          className="dimensionLabel"
+          style={{
+            bottom: `50%`,
+            left: `50%`,
+            width: dimensionsExampleOptions.yRadius,
+            borderBottom: `2px solid white`,
+            transformOrigin: `center bottom`,
+            transform: `translate(-50%, -${
+              dimensionsExampleOptions.yRadius / 2
+            }px) rotate(90deg)`,
+          }}
+        >
+          yRadius
+        </p>
+        <p
+          className="dimensionLabel"
+          style={{
+            bottom: `50%`,
+            right: `50%`,
+            boxSizing: "border-box",
+            transform: `translate(${dimensionsExampleOptions.xRadius}px, ${
+              dimensionsExampleOptions.yRadius -
+              dimensionsExampleOptions.cornerRadius
+            }px)`,
+            paddingRight: 5,
+          }}
+        >
+          cornerRadius
+        </p>
+        <p
+          className="dimensionLabel"
+          style={{
+            top: `50%`,
+            right: `50%`,
+            borderTop: `2px solid white`,
+            borderLeft: `2px dashed rgba(255,255,255,0.5)`,
+            boxSizing: "border-box",
+            width: dimensionsExampleOptions.cornerRadius,
+            height: dimensionsExampleOptions.cornerRadius,
+            transform: `translate(${dimensionsExampleOptions.xRadius}px, ${
+              dimensionsExampleOptions.yRadius -
+              dimensionsExampleOptions.cornerRadius
+            }px)`,
+          }}
+        ></p>
+        <p
+          className="dimensionLabel"
+          style={{
+            bottom: `50%`,
+            left: `50%`,
+            height: dimensionsExampleOptions.fringeWidth,
+            borderLeft: `2px solid white`,
+            paddingLeft: 5,
+            marginBottom: dimensionsExampleOptions.yRadius,
+            transform: `translateX(-50%)`,
+            paddingTop: dimensionsExampleOptions.fringeWidth - 60,
+            boxSizing: "border-box",
+          }}
+        >
+          fringeWidth
+        </p>
+        <p
+          className="dimensionRegion"
+          style={{
+            top: `50%`,
+            left: `calc(50% - ${dimensionsExampleOptions.xRadius / 2 - 10}px`,
+            transform: `translate(-50%, -50%)`,
+          }}
+        >
+          Center
+          <br />
+          Region
+        </p>
+        <p
+          className="dimensionRegion"
+          style={{
+            top: `calc(50% + ${
+              dimensionsExampleOptions.yRadius +
+              dimensionsExampleOptions.fringeWidth / 2
+            }px)`,
+            left: `50%`,
+            transform: `translate(-50%, -50%)`,
+          }}
+        >
+          Fringe Region
+        </p>
+      </div>
+      <p className="dimensionsDesc">
+        Each bubble's size is defined by its position relative to the center and
+        fringe regions.
+        <br />
+        <br />
+        If a bubble's center is{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          within the center region
+        </span>
+        , it has{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          maximum size
+        </span>
+        .
+        <br />
+        <br />
+        If a bubble's center is{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          outside the fringe region
+        </span>
+        , it has{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          minimum size
+        </span>
+        .
+        <br />
+        <br />
+        If a bubble's center is{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          within the fringe region
+        </span>
+        , its{" "}
+        <span
+          style={{
+            fontWeight: 1000,
+          }}
+        >
+          size is interpolated between its min and max
+        </span>{" "}
+        values, dependent on its current progression through the fringe.
+      </p>
       <h4>Options Prop Documentation</h4>
-      <p className="propDesc">
+      <p className="optionsDesc">
         The React-Bubble-UI component takes one prop, options, which is an
         object specifying any or all of the following:
       </p>

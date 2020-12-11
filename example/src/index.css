@@ -191,12 +191,13 @@ h3 {
 .codeBlock {
   width: 100%;
   max-width: 500px;
+  margin-bottom: 30px;
 }
 
 h4 {
-  margin-top: 120px;
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-top: 80px;
+  margin-bottom: 60px;
+  font-size: 34px;
   font-weight: 1000;
   text-align: center;
 }
@@ -205,7 +206,7 @@ h4 {
   font-size: 20px;
 
   text-align: center;
-  max-width: 600px;
+  max-width: 800px;
   margin-bottom: 80px;
 }
 
@@ -285,4 +286,39 @@ h4 {
 .comparisonText {
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+.dimensionsBubbleUI {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 500px;
+  background-color: white;
+  border-radius: 40px;
+}
+
+.dimensionLabel {
+  position: absolute;
+  font-size: 18px;
+  color: white;
+  font-weight: 1000;
+}
+
+.dimensionRegion {
+  position: absolute;
+  font-size: 24px;
+  font-weight: 1000;
+  color: white;
+}
+
+.optionsDesc {
+  font-size: 20px;
+  margin-top: -40px;
+  margin-bottom: 80px;
+}
+
+.dimensionsDesc {
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
