@@ -1,6 +1,6 @@
 {
-  "short_name": "bubble-ui",
-  "name": "bubble-ui",
+  "short_name": "react-bubble-ui",
+  "name": "react-bubble-ui",
   "icons": [
     {
       "src": "favicon.ico",

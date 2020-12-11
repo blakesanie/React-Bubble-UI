@@ -299,12 +299,12 @@ export default function App(props) {
   const actions = [
     {
       text: "Download from",
-      url: "https://blakesanie.com",
+      url: "https://www.npmjs.com/package/react-bubble-ui",
       fileName: "npm.png",
     },
     {
       text: "Contribute on",
-      url: "https://github.com/blakesanie/bubble-ui",
+      url: "https://github.com/blakesanie/React-Bubble-UI",
       fileName: "github.png",
     },
     {
@@ -316,13 +316,14 @@ export default function App(props) {
 
   return (
     <React.Fragment>
-      <h1>React-Bubble-Layout</h1>
+      <h1>React-Bubble-UI</h1>
       <h2>
-        First showcased on Apple Watch, now available for your React web app
+        A highly configurable Bubble UI React.js component, similar to the
+        iconic Apple Watch app layout.
       </h2>
       <div className="install">
         <CopyBlock
-          text="npm install react-bubble-layout"
+          text="npm install react-bubble-ui"
           language="text"
           showLineNumbers={false}
           theme={hybrid}
@@ -340,7 +341,7 @@ export default function App(props) {
               className="action"
             >
               {action.text}
-              <img src={`/images/${action.fileName}`} alt=""></img>
+              <img src={`./images/${action.fileName}`} alt=""></img>
             </a>
           );
         })}
@@ -412,7 +413,7 @@ export default function App(props) {
       <h3>Resulting React.js Code</h3>
       <div className="codeBlock">
         <CopyBlock
-          text={`export default function myComponent(props) {\n\tconst options = ${JSON.stringify(
+          text={`import BubbleUI from "react-bubble-ui";\n\nexport default function myComponent(props) {\n\tconst options = ${JSON.stringify(
             options,
             null,
             "\t\t"
@@ -421,7 +422,7 @@ export default function App(props) {
             .replace(
               "}",
               "\t}"
-            )}\n\n\treturn (<BubbleLayout options={options}>\n\t\t{/* children */}\n\t</BubbleLayout>)\n};`}
+            )}\n\n\treturn (<BubbleUI options={options}>\n\t\t{/* children */}\n\t</BubbleUI>)\n};`}
           language="javascript"
           showLineNumbers={true}
           theme={hybrid}
@@ -430,7 +431,7 @@ export default function App(props) {
       </div>
       <h4>Options Prop Documentation</h4>
       <p className="propDesc">
-        The React-Bubble-Layout component takes one prop, options, which is an
+        The React-Bubble-UI component takes one prop, options, which is an
         object specifying any or all of the following:
       </p>
       {controls.map((control, i) => {

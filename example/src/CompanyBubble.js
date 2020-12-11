@@ -22,7 +22,7 @@ export default function CompanyBubble(props) {
           }}
         >
           <img
-            src={`/companyLogos/${props.symbol}.svg`}
+            src={`./companyLogos/${props.symbol}.svg`}
             alt=""
             style={{
               width: 50,

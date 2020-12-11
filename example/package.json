@@ -1,5 +1,5 @@
 {
-  "name": "bubble-ui-example",
+  "name": "react-bubble-ui-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -7,25 +7,42 @@
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
     "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
     "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
-    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "bubble-ui": "file:..",
+    "react-bubble-ui": "file:..",
     "react": "file:../node_modules/react",
     "react-code-blocks": "0.0.8",
     "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "file:../node_modules/react-scripts"
+    "react-scripts": "file:../node_modules/react-scripts",
+    "react-snapshot": "^1.3.0"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "gh-pages": "^3.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "reactSnapshot": {
+    "include": [
+      "/"
+    ],
+    "exclude": [],
+    "snapshotDelay": 100
+  }
 }
