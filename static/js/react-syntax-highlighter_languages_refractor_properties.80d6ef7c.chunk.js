@@ -1,0 +1,2 @@
+(this["webpackJsonpreact-bubble-ui-example"]=this["webpackJsonpreact-bubble-ui-example"]||[]).push([[106],{183:function(e,t,s){"use strict";function a(e){e.languages.properties={comment:/^[ \t]*[#!].*$/m,"attr-value":{pattern:/(^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+?(?: *[=:] *| ))(?:\\(?:\r\n|[\s\S])|[^\\\r\n])+/m,lookbehind:!0},"attr-name":/^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+?(?= *[=:] *| )/m,punctuation:/[=:]/}}e.exports=a,a.displayName="properties",a.aliases=[]}}]);
+//# sourceMappingURL=react-syntax-highlighter_languages_refractor_properties.80d6ef7c.chunk.js.map
