@@ -12,13 +12,13 @@ A highly configurable Bubble UI React.js component, similar to the iconic Apple 
 npm install --save react-bubble-ui
 ```
 
-## Interactive Demo 🎛️
+## Interactive Demo
 
 Interact with a live demo to configure to UI to your liking.
 
 [**Experience Demo**](blakesanie.github.io/React-Bubble-UI)
 
-## Thorough Documentaion 📋
+## Thorough Documentation
 
 Understand how to apply the component's high confirgurability to your design.
 
@@ -28,7 +28,7 @@ Understand how to apply the component's high confirgurability to your design.
 
 I highly encourage you to help improve this package further through the following steps:
 
-1. Fork this respository, and clone your fork
+1. Fork this repository, and clone your fork
 2. Create an upstream remote and sync your local copy
 3. Branch off for the new feature
 4. Contribute the feature (write the code)
@@ -37,7 +37,7 @@ I highly encourage you to help improve this package further through the followin
 
 ## Author
 
-This package was created by [blakesanie](https://github.com/blakesanie) in 2020.
+This package was created by [Blake Sanie](https://github.com/blakesanie) in 2020.
 
 Like what you see? [View his other projects 📱 ](blakesanie.com/cs), [read his blog 💻 ](blakesanie.medium.com), or [buy him a coffee ☕](https://paypal.me/blakesanie?locale.x=en_US).
 
