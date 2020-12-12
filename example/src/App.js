@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import { CopyBlock, hybrid } from "react-code-blocks";
-import BubbleUI, { defaultOptions } from "bubble-ui";
-import "bubble-ui/dist/index.css";
+import BubbleUI, { defaultOptions } from "react-bubble-ui";
+import "react-bubble-ui/dist/index.css";
 import companyData from "./companies";
 import CompanyBubble from "./CompanyBubble";
 import DummyBubble from "./DummyBubble";
@@ -26,7 +26,7 @@ const dimensionsExampleOptions = {
   minSize: 14,
   gutter: 8,
   provideProps: false,
-  numCols: 7,
+  numCols: 6,
   fringeWidth: 100,
   yRadius: 120,
   xRadius: 160,

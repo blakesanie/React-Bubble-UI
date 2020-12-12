@@ -64,7 +64,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
 .scrollable {

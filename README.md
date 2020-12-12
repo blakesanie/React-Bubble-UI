@@ -16,13 +16,13 @@ npm install --save react-bubble-ui
 
 Interact with a live demo to configure to UI to your liking.
 
-[**Experience Demo**](https://blakesanie.github.io/React-Bubble-UI)
+[**Experience Demo**](https://blakesanie.github.io/React-Bubble-UI/#/demo)
 
 ## Thorough Documentation
 
 Understand how to apply the component's high confirgurability to your design.
 
-[**Read Docs**](https://blakesanie.github.io/React-Bubble-UI)
+[**Read Docs**](https://blakesanie.github.io/React-Bubble-UI/#/docs)
 
 ## Contributing
 
