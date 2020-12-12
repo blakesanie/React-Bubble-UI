@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { CopyBlock, hybrid } from "react-code-blocks";
 import BubbleUI, { defaultOptions } from "bubble-ui";
 import "bubble-ui/dist/index.css";
@@ -55,6 +55,10 @@ export default function App(props) {
         size: 100,
       },
       ref: useRef(null),
+      range: {
+        start: "minSize",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -71,6 +75,10 @@ export default function App(props) {
         minSize: 20,
       },
       ref: useRef(null),
+      range: {
+        start: "minSize",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -87,6 +95,10 @@ export default function App(props) {
         gutter: 30,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -103,6 +115,10 @@ export default function App(props) {
         numCols: 10,
       },
       ref: useRef(null),
+      range: {
+        start: "2",
+        end: "len(children components)",
+      },
     },
     {
       type: "range",
@@ -120,6 +136,10 @@ export default function App(props) {
         xRadius: 120,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -137,6 +157,10 @@ export default function App(props) {
         yRadius: 120,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -154,6 +178,10 @@ export default function App(props) {
         cornerRadius: 100,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "min(xRadius, yRadius)",
+      },
     },
     {
       type: "range",
@@ -171,6 +199,10 @@ export default function App(props) {
         fringeWidth: 130,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "Infinity",
+      },
     },
     {
       type: "range",
@@ -187,6 +219,10 @@ export default function App(props) {
         gravitation: 9,
       },
       ref: useRef(null),
+      range: {
+        start: "0",
+        end: "10",
+      },
     },
     {
       type: "checkbox",
@@ -290,6 +326,23 @@ export default function App(props) {
     },
   ];
 
+  useLayoutEffect(() => {
+    const hash = window.location.hash.split("#/")[1];
+    if (hash == "demo") {
+      demo.current.scrollIntoView({
+        behavior: "auto",
+      });
+    } else if (hash == "docs") {
+      docs.current.scrollIntoView({
+        behavior: "auto",
+      });
+    }
+  }, []);
+
+  const demo = useRef(null);
+
+  const docs = useRef(null);
+
   return (
     <React.Fragment>
       <h1>React-Bubble-UI</h1>
@@ -322,7 +375,7 @@ export default function App(props) {
           );
         })}
       </div>
-      <h3>Interactive Demo</h3>
+      <h3 ref={demo}>Interactive Demo</h3>
       <BubbleUI className="bubbleUI" options={options}>
         {stockBubbles}
       </BubbleUI>
@@ -405,7 +458,7 @@ export default function App(props) {
           codeBlock
         />
       </div>
-      <h4>Understanding Layout Dimensions</h4>
+      <h4 ref={docs}>Understanding Layout Dimensions</h4>
       <div className="dimensionsBubbleUI">
         <BubbleUI
           className="dimensionsBubbleUI"
@@ -571,7 +624,7 @@ export default function App(props) {
         >
           size is interpolated between its min and max
         </span>{" "}
-        values, dependent on its current progression through the fringe.
+        values, depending on its current progression through the fringe.
       </p>
       <h4>Options Prop Documentation</h4>
       <p className="optionsDesc">
@@ -607,7 +660,13 @@ export default function App(props) {
               <span>, {control.type === "range" ? "Number" : "boolean"}</span>
             </p>
             <p className="optionDefault">
-              {defaultOptions[control.optionKey]} by default
+              {`${defaultOptions[control.optionKey]} by default ${
+                control.range
+                  ? `, range [${control.range.start}, ${control.range.end}${
+                      control.range.end == "Infinity" ? ")" : "]"
+                    }`
+                  : ""
+              }`}
             </p>
             <p className="optionDesc">{control.desc}</p>
             <div className="comparisonContainer">

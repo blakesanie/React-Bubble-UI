@@ -97,7 +97,8 @@ h2 {
 }
 
 h3 {
-  margin: 30px 0;
+  margin: 10px 0 30px 0;
+  padding-top: 20px;
   font-size: 20px;
   font-weight: 1000;
   text-align: center;
@@ -195,7 +196,8 @@ h3 {
 }
 
 h4 {
-  margin-top: 80px;
+  margin-top: 60px;
+  padding-top: 20px;
   margin-bottom: 60px;
   font-size: 34px;
   font-weight: 1000;
@@ -315,10 +317,12 @@ h4 {
   font-size: 20px;
   margin-top: -40px;
   margin-bottom: 80px;
+  max-width: 600px;
 }
 
 .dimensionsDesc {
   font-size: 20px;
   margin-top: 40px;
   margin-bottom: 30px;
+  max-width: 800px;
 }
