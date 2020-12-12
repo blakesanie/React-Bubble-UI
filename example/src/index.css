@@ -33,6 +33,28 @@ body {
   align-items: center;
 }
 
+.headerBar {
+  width: 100%;
+  position: fixed;
+  z-index: 99999;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.headerButton {
+  cursor: pointer;
+  font-size: 16px;
+  margin: 6px 12px;
+  font-weight: 1000;
+  color: rgb(0, 74, 158);
+  transition: opacity 0.2s ease;
+}
+
+.headerButton:hover {
+  opacity: 0.4;
+}
+
 .bubbleUI {
   position: relative;
   background-color: rgba(0, 0, 0, 0) !important;
@@ -52,7 +74,7 @@ body {
 
 h1 {
   font-size: 40px;
-  margin-top: 50px;
+  margin-top: 80px;
   width: 100%;
   text-align: center;
   font-weight: 1000;
@@ -191,7 +213,7 @@ h3 {
 
 .codeBlock {
   width: 100%;
-  max-width: 500px;
+  max-width: 650px;
   margin-bottom: 30px;
 }
 
@@ -266,7 +288,7 @@ h4 {
 .optionDesc {
   font-size: 20px;
   margin-bottom: 20px;
-  max-width: 1000px;
+  max-width: 900px;
 }
 
 .comparisonContainer {

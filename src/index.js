@@ -258,8 +258,8 @@ export default function BubbleElement(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        ...props.style,
       }}
-      style={props.style}
     >
       <div className={styles.container} onScroll={handleScroll}>
         {/* <p>{`scrollTop: ${scrollTop}`}</p>

@@ -76,8 +76,8 @@ export default function App(props) {
       },
       ref: useRef(null),
       range: {
-        start: "minSize",
-        end: "Infinity",
+        start: "0",
+        end: "size",
       },
     },
     {
@@ -326,25 +326,88 @@ export default function App(props) {
     },
   ];
 
+  const scrollToRef = (ref) => {
+    if (ref) {
+      const y = ref.current.offsetTop - 50;
+      window.scrollTo(0, y);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  };
+
   useLayoutEffect(() => {
     const hash = window.location.hash.split("#/")[1];
     if (hash == "demo") {
-      demo.current.scrollIntoView({
-        behavior: "auto",
-      });
+      scrollToRef(demoRef);
     } else if (hash == "docs") {
-      docs.current.scrollIntoView({
-        behavior: "auto",
-      });
+      scrollToRef(docsRef);
+    } else if (hash == "code") {
+      scrollToRef(codeRef);
+    } else if (hash == "layout") {
+      scrollToRef(layoutRef);
+    } else if (hash == "style") {
+      scrollToRef(styleRef);
     }
   }, []);
 
-  const demo = useRef(null);
-
-  const docs = useRef(null);
+  const demoRef = useRef(null);
+  const docsRef = useRef(null);
+  const codeRef = useRef(null);
+  const layoutRef = useRef(null);
+  const styleRef = useRef(null);
 
   return (
     <React.Fragment>
+      <div className="headerBar">
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(undefined);
+          }}
+        >
+          Top
+        </p>
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(demoRef);
+          }}
+        >
+          Interactive Demo
+        </p>
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(codeRef);
+          }}
+        >
+          Sample Code
+        </p>
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(layoutRef);
+          }}
+        >
+          Layout Dimensions
+        </p>
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(docsRef);
+          }}
+        >
+          Options Documentation
+        </p>
+        <p
+          className="headerButton"
+          onClick={() => {
+            scrollToRef(styleRef);
+          }}
+        >
+          Styling Guide
+        </p>
+      </div>
       <h1>React-Bubble-UI</h1>
       <h2>
         A highly configurable Bubble UI React.js component, similar to the
@@ -375,7 +438,7 @@ export default function App(props) {
           );
         })}
       </div>
-      <h3 ref={demo}>Interactive Demo</h3>
+      <h3 ref={demoRef}>Interactive Demo</h3>
       <BubbleUI className="bubbleUI" options={options}>
         {stockBubbles}
       </BubbleUI>
@@ -439,10 +502,10 @@ export default function App(props) {
           );
         })}
       </div>
-      <h3>Resulting React.js Code</h3>
+      <h3 ref={codeRef}>Resulting React.js Code</h3>
       <div className="codeBlock">
         <CopyBlock
-          text={`import BubbleUI from "react-bubble-ui";\n\nexport default function myComponent(props) {\n\tconst options = ${JSON.stringify(
+          text={`// myComponent.js\n\nimport BubbleUI from "react-bubble-ui";\nimport "react-bubble-ui/dist/index.css";\nimport Child from "./ChildComponent";\nimport "./myComponent.css";\n\nexport default function myComponent(props) {\n\tconst options = ${JSON.stringify(
             options,
             null,
             "\t\t"
@@ -451,14 +514,26 @@ export default function App(props) {
             .replace(
               "}",
               "\t}"
-            )}\n\n\treturn (<BubbleUI options={options}>\n\t\t{/* children */}\n\t</BubbleUI>)\n};`}
+            )}\n\n\tconst children = props.data.map((data, i) => {\n\t\t return <Child data={data} className="child">\n\t});\n\n\treturn (<BubbleUI options={options} className="myBubbleUI" key={i}>\n\t\t{children}\n\t</BubbleUI>)\n};`}
           language="javascript"
           showLineNumbers={true}
           theme={hybrid}
           codeBlock
         />
+        <div
+          style={{
+            height: 12,
+          }}
+        ></div>
+        <CopyBlock
+          text={`/* myComponent.css */\n\n.myBubbleUI {\n\twidth: 100%;\n\tmax-width: 1000px;\n\theight: 500px\n\tborder-radius: 50px\n}\n\n.child {\n\twidth: 100%;\n\theight: 100%;\n\tborder-radius: 50%;\n}`}
+          language="css"
+          showLineNumbers={true}
+          theme={hybrid}
+          codeBlock
+        />
       </div>
-      <h4 ref={docs}>Understanding Layout Dimensions</h4>
+      <h4 ref={layoutRef}>Understanding Layout Dimensions</h4>
       <div className="dimensionsBubbleUI">
         <BubbleUI
           className="dimensionsBubbleUI"
@@ -626,7 +701,7 @@ export default function App(props) {
         </span>{" "}
         values, depending on its current progression through the fringe.
       </p>
-      <h4>Options Prop Documentation</h4>
+      <h4 ref={docsRef}>Options Prop Documentation</h4>
       <p className="optionsDesc">
         The React-Bubble-UI component takes one prop, options, which is an
         object specifying any or all of the following:
@@ -692,6 +767,39 @@ export default function App(props) {
           </div>
         );
       })}
+      <h4 ref={styleRef}>Styling BubbleUI and its Children</h4>
+      <p className="optionDesc">
+        The styling of the outer container and child components is kept open to
+        the user.
+        <br />
+        <br />
+        The outer container of{" "}
+        <span style={{ fontWeight: 1000 }}>
+          BubbleUI requires height and width dimensions
+        </span>{" "}
+        to be rendered. Feel free to also add borders, a background color,
+        rounded corners, or any other styles to your liking.
+        <br />
+        <br />
+        <span style={{ fontWeight: 1000 }}>
+          Children components are rendered into a fixed-dimension container.
+        </span>{" "}
+        This means adequate styles are necessary fit your component to for this
+        container. Bubbles are also not rounded, by default.
+        <br />
+        <br />
+        We recommend these minimum styles for your BubbleUI and children
+        components:
+      </p>
+      <div className="codeBlock">
+        <CopyBlock
+          text={`.bubbleUI {\n\twidth: 600px; /* width of BubbleUI container */\n\theight: 400px; /* height of BubbleUI container */\n}\n\n.childComponent {\n\twidth: 100%; /* width expands to fit bubble */\n\theight: 100%; /* width expands to fit bubble */\n\tborder-radius: 50%; /* rounded border forms a circle */\n}`}
+          language="css"
+          showLineNumbers={true}
+          theme={hybrid}
+          codeBlock
+        />
+      </div>
     </React.Fragment>
   );
 }
