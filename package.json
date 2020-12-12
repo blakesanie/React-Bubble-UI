@@ -1,6 +1,6 @@
 {
   "name": "react-bubble-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A highly configurable Bubble UI React.js component, similar to the iconic Apple Watch app layout.",
   "author": "blakesanie",
   "license": "MIT",
@@ -11,6 +11,18 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "react",
+    "component",
+    "apple watch",
+    "circle",
+    "bubble",
+    "layout",
+    "watchOS",
+    "apple",
+    "iOS",
+    "parallax"
+  ],
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
