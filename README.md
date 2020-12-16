@@ -4,7 +4,7 @@ A highly configurable Bubble UI React.js component, similar to the iconic Apple 
 
 [![NPM](https://img.shields.io/npm/v/react-bubble-ui.svg)](https://www.npmjs.com/package/react-bubble-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-<img src="./example/public/demoScreenshot.png" style="border-radius: 30px"/>
+<img src="./example/public/demo.gif" style="border-radius: 30px"/>
 
 ## Install
 
