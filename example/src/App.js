@@ -373,7 +373,7 @@ export default function App(props) {
             scrollToRef(demoRef);
           }}
         >
-          Interactive Demo
+          Demo
         </p>
         <p
           className="headerButton"
@@ -381,7 +381,7 @@ export default function App(props) {
             scrollToRef(codeRef);
           }}
         >
-          Sample Code
+          Code
         </p>
         <p
           className="headerButton"
@@ -389,7 +389,7 @@ export default function App(props) {
             scrollToRef(layoutRef);
           }}
         >
-          Layout Dimensions
+          Layout
         </p>
         <p
           className="headerButton"
@@ -397,7 +397,7 @@ export default function App(props) {
             scrollToRef(docsRef);
           }}
         >
-          Options Documentation
+          Docs
         </p>
         <p
           className="headerButton"
@@ -405,7 +405,7 @@ export default function App(props) {
             scrollToRef(styleRef);
           }}
         >
-          Styling Guide
+          Styles
         </p>
       </div>
       <h1>React-Bubble-UI</h1>
@@ -444,7 +444,7 @@ export default function App(props) {
       </BubbleUI>
       <h3>Realtime Options</h3>
       <div className="controlBar">
-        <div className="control">
+        {/* <div className="control">
           <div className="top">
             <p className="controlTitle">Sample Component</p>
           </div>
@@ -455,7 +455,7 @@ export default function App(props) {
               <option value="foods">Foods</option>
             </select>
           </div>
-        </div>
+        </div> */}
         {controls.map((control) => {
           return (
             <div className="control" key={control.optionKey}>
@@ -514,7 +514,7 @@ export default function App(props) {
             .replace(
               "}",
               "\t}"
-            )}\n\n\tconst children = props.data.map((data, i) => {\n\t\t return <Child data={data} className="child">\n\t});\n\n\treturn (<BubbleUI options={options} className="myBubbleUI" key={i}>\n\t\t{children}\n\t</BubbleUI>)\n};`}
+            )}\n\n\tconst children = props.data.map((data, i) => {\n\t\t return <Child data={data} className="child" key={i}>\n\t});\n\n\treturn (<BubbleUI options={options} className="myBubbleUI">\n\t\t{children}\n\t</BubbleUI>)\n};`}
           language="javascript"
           showLineNumbers={true}
           theme={hybrid}
