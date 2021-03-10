@@ -63,7 +63,6 @@ export default function BubbleElement(props) {
   const [scrollLeft, setScrollLeft] = useState(0);
 
   const handleScroll = (e) => {
-    // console.log(e)
     if (e.target.className) {
       setScrollTop(e.target.scrollTop);
       setScrollLeft(e.target.scrollLeft);
@@ -261,10 +260,14 @@ export default function BubbleElement(props) {
         ...props.style,
       }}
     >
-      <div className={styles.container} onScroll={handleScroll}>
+      <div className={styles.container}>
         {/* <p>{`scrollTop: ${scrollTop}`}</p>
         <p>{`scrollLeft: ${scrollLeft}`}</p> */}
-        <div className={styles.scrollable} ref={scrollable}>
+        <div
+          className={styles.scrollable}
+          ref={scrollable}
+          onScroll={handleScroll}
+        >
           <div
             className={styles.horizontalSpacer}
             style={{
