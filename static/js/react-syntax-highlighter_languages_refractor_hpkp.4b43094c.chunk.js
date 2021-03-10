@@ -1,2 +1,0 @@
-(this["webpackJsonpreact-bubble-ui-example"]=this["webpackJsonpreact-bubble-ui-example"]||[]).push([[54],{137:function(e,a,t){"use strict";function s(e){e.languages.hpkp={directive:{pattern:/\b(?:(?:includeSubDomains|preload|strict)(?: |;)|pin-sha256="[a-zA-Z\d+=/]+"|(?:max-age|report-uri)=|report-to )/,alias:"keyword"},safe:{pattern:/\d{7,}/,alias:"selector"},unsafe:{pattern:/\d{1,6}/,alias:"function"}}}e.exports=s,s.displayName="hpkp",s.aliases=[]}}]);
-//# sourceMappingURL=react-syntax-highlighter_languages_refractor_hpkp.4b43094c.chunk.js.map
