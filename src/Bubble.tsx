@@ -28,7 +28,7 @@ interface OptionsProps {
 
 interface Props {
   options: OptionsProps;
-  children: React.ReactNode[];
+  children: React.ReactElement[];
   className?: string;
 }
 
@@ -90,7 +90,7 @@ export function Bubble(props: Props) {
     options.size / 2 -
     (options.cornerRadius * (1.414 - 1)) / 1.414}px)`;
 
-  let rows: any = [];
+  let rows: React.ReactElement[][] = [];
   let colsRemaining = 0;
   let evenRow = true;
 
@@ -305,7 +305,7 @@ export function Bubble(props: Props) {
               paddingRight: horizontalPadding,
             }}
           >
-            {rows.map((row: any, i: number) => {
+            {rows.map((row, i: number) => {
               return (
                 <Row
                   key={`${row}-${i}`}
@@ -316,7 +316,7 @@ export function Bubble(props: Props) {
                         : 0,
                   }}
                 >
-                  {row.map((comp: any, j: number) => {
+                  {row.map((comp, j: number) => {
                     const {
                       bubbleSize,
                       translateX,
