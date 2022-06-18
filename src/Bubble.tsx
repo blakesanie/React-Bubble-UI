@@ -1,5 +1,14 @@
 import React, { useState, useLayoutEffect, useRef, Children } from 'react';
-import styles from './bubble.module.css';
+import {
+  Container,
+  Scrollable,
+  HorizontalSpacer,
+  RowContainer,
+  Row,
+  BubbleContainer,
+  Guide,
+  GuideContainer,
+} from './styles';
 
 interface OptionsProps {
   size: number;
@@ -277,22 +286,16 @@ export function Bubble(props: Props) {
         alignItems: 'center',
       }}
     >
-      <div className={styles.container}>
+      <Container>
         {/* <p>{`scrollTop: ${scrollTop}`}</p>
         <p>{`scrollLeft: ${scrollLeft}`}</p> */}
-        <div
-          className={styles.scrollable}
-          ref={scrollable}
-          onScroll={handleScroll}
-        >
-          <div
-            className={styles.horizontalSpacer}
+        <Scrollable ref={scrollable} onScroll={handleScroll}>
+          <HorizontalSpacer
             style={{
               height: verticalPadding,
             }}
-          ></div>
-          <div
-            className={styles.rowContainer}
+          ></HorizontalSpacer>
+          <RowContainer
             style={{
               width:
                 options.size * options.numCols +
@@ -303,8 +306,7 @@ export function Bubble(props: Props) {
           >
             {rows.map((row: any, i: number) => {
               return (
-                <div
-                  className={styles.row}
+                <Row
                   key={`${row}-${i}`}
                   style={{
                     marginTop:
@@ -321,9 +323,8 @@ export function Bubble(props: Props) {
                       distance,
                     } = getBubbleSize(i, j);
                     return (
-                      <div
+                      <BubbleContainer
                         key={`${comp}-${i}`}
-                        className={styles.bubbleContainer}
                         style={{
                           width: options.size,
                           height: options.size,
@@ -340,34 +341,31 @@ export function Bubble(props: Props) {
                               minSize: options.minSize,
                             })
                           : comp}
-                      </div>
+                      </BubbleContainer>
                     );
                   })}
-                </div>
+                </Row>
               );
             })}
-          </div>
-          <div
-            className={styles.horizontalSpacer}
+          </RowContainer>
+          <HorizontalSpacer
             style={{
               height: verticalPadding,
             }}
-          ></div>
-        </div>
+          ></HorizontalSpacer>
+        </Scrollable>
 
         {options.showGuides ? (
-          <div className={styles.guideContainer}>
-            <div
-              className={styles.guide}
+          <GuideContainer>
+            <Guide
               style={{
                 height: options.yRadius * 2,
                 width: options.xRadius * 2,
                 borderRadius:
                   options.shape === 'ellipse' ? '50%' : options.cornerRadius,
               }}
-            ></div>
-            <div
-              className={styles.guide}
+            ></Guide>
+            <Guide
               style={{
                 height: (options.yRadius + options.fringeWidth) * 2,
                 width: (options.xRadius + options.fringeWidth) * 2,
@@ -376,10 +374,10 @@ export function Bubble(props: Props) {
                     ? '50%'
                     : options.cornerRadius + options.fringeWidth,
               }}
-            ></div>
-          </div>
+            ></Guide>
+          </GuideContainer>
         ) : null}
-      </div>
+      </Container>
     </div>
   );
 }
