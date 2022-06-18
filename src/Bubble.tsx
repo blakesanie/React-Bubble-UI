@@ -61,11 +61,12 @@ export function Bubble(props: Props) {
 
   useLayoutEffect(() => {
     window.addEventListener('scroll', handleScroll);
-
-    scrollable?.current?.scrollTo(
-      (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
-      (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2
-    );
+    if (scrollable.current) {
+      window.scrollTo(
+        (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
+        (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2
+      );
+    }
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
