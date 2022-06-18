@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef, Children } from 'react';
-const styles = require('./bubble.module.css');
+import styles from './bubble.module.css';
 
 interface OptionsProps {
   size: number;
