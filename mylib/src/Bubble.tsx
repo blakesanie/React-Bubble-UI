@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef, Children } from 'react';
-import './bubble.module.css';
+const styles = require('./bubble.module.css');
 
 interface OptionsProps {
   size: number;
@@ -277,18 +277,22 @@ export function Bubble(props: Props) {
         alignItems: 'center',
       }}
     >
-      <div className="container">
+      <div className={styles.container}>
         {/* <p>{`scrollTop: ${scrollTop}`}</p>
         <p>{`scrollLeft: ${scrollLeft}`}</p> */}
-        <div className="scrollable" ref={scrollable} onScroll={handleScroll}>
+        <div
+          className={styles.scrollable}
+          ref={scrollable}
+          onScroll={handleScroll}
+        >
           <div
-            className="horizontalSpacer"
+            className={styles.horizontalSpacer}
             style={{
               height: verticalPadding,
             }}
           ></div>
           <div
-            className="rowContainer"
+            className={styles.rowContainer}
             style={{
               width:
                 options.size * options.numCols +
@@ -300,7 +304,7 @@ export function Bubble(props: Props) {
             {rows.map((row: any, i: number) => {
               return (
                 <div
-                  className={row}
+                  className={styles.row}
                   key={`${row}-${i}`}
                   style={{
                     marginTop:
@@ -319,7 +323,7 @@ export function Bubble(props: Props) {
                     return (
                       <div
                         key={`${comp}-${i}`}
-                        className="bubbleContainer"
+                        className={styles.bubbleContainer}
                         style={{
                           width: options.size,
                           height: options.size,
@@ -344,7 +348,7 @@ export function Bubble(props: Props) {
             })}
           </div>
           <div
-            className="horizontalSpacer"
+            className={styles.horizontalSpacer}
             style={{
               height: verticalPadding,
             }}
@@ -352,9 +356,9 @@ export function Bubble(props: Props) {
         </div>
 
         {options.showGuides ? (
-          <div className="guideContainer">
+          <div className={styles.guideContainer}>
             <div
-              className="guide"
+              className={styles.guide}
               style={{
                 height: options.yRadius * 2,
                 width: options.xRadius * 2,
@@ -363,7 +367,7 @@ export function Bubble(props: Props) {
               }}
             ></div>
             <div
-              className="guide"
+              className={styles.guide}
               style={{
                 height: (options.yRadius + options.fringeWidth) * 2,
                 width: (options.xRadius + options.fringeWidth) * 2,
