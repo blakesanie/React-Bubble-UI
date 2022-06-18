@@ -66,7 +66,10 @@ export function Bubble(props: Props) {
 
   Object.assign(options, defaultOptions);
   Object.assign(options, props.options);
-  options.numCols = Math.min(options.numCols, Children.count(props.children));
+  options.numCols = Math.min(
+    options.numCols,
+    Children.toArray(props.children).length
+  );
 
   const minProportion = options.minSize / options.size;
 
@@ -81,7 +84,7 @@ export function Bubble(props: Props) {
   let colsRemaining = 0;
   let evenRow = true;
 
-  for (let i = 0; i < Children.count(props.children); i++) {
+  for (let i = 0; i < Children.toArray(props.children).length; i++) {
     if (colsRemaining === 0) {
       colsRemaining = evenRow ? options.numCols - 1 : options.numCols;
       evenRow = !evenRow;
