@@ -1,11 +1,10 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { Bubble } from '../src';
 
 describe('it', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
+    render(
       <Bubble
         options={{
           size: 200,
@@ -24,9 +23,7 @@ describe('it', () => {
       >
         <div>Hello</div>
         <div>Hello</div>
-      </Bubble>,
-      div
+      </Bubble>
     );
-    ReactDOM.unmountComponentAtNode(div);
   });
 });
