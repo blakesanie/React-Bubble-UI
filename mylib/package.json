@@ -33,16 +33,16 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "mylib",
+  "name": "react-bubble-ui-v2",
   "author": "Joshua Frankle",
-  "module": "dist/mylib.esm.js",
+  "module": "dist/react-bubble-ui-v2.esm.js",
   "size-limit": [
     {
-      "path": "dist/mylib.cjs.production.min.js",
+      "path": "dist/react-bubble-ui-v2.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/mylib.esm.js",
+      "path": "dist/react-bubble-ui-v2.esm.js",
       "limit": "10 KB"
     }
   ],
