@@ -1,66 +1,67 @@
 {
-  "name": "react-bubble-ui",
-  "version": "1.1.0",
-  "description": "A highly configurable Bubble UI React.js component, similar to the iconic Apple Watch app layout.",
-  "author": "blakesanie",
+  "version": "0.1.2",
   "license": "MIT",
-  "repository": "blakesanie/React-Bubble-UI",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
-  "source": "src/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "engines": {
     "node": ">=10"
   },
-  "keywords": [
-    "react",
-    "component",
-    "apple watch",
-    "circle",
-    "bubble",
-    "layout",
-    "watchOS",
-    "apple",
-    "iOS",
-    "parallax"
-  ],
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "prepare": "run-s build",
-    "test": "run-s test:unit test:lint test:build",
-    "test:build": "run-s build",
-    "test:lint": "eslint .",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": ">=16"
   },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "gh-pages": "^2.2.0",
-    "microbundle-crl": "^0.13.10",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^3.4.1"
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
   },
-  "files": [
-    "dist"
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "react-bubble-ui-v2",
+  "author": "Joshua Frankle",
+  "module": "dist/react-bubble-ui-v2.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/react-bubble-ui-v2.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-bubble-ui-v2.esm.js",
+      "limit": "10 KB"
+    }
   ],
-  "dependencies": {}
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@testing-library/react": "^13.3.0",
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "@types/styled-components": "^5.1.25",
+    "husky": "^8.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4",
+    "typescript-plugin-css-modules": "^3.4.0"
+  },
+  "dependencies": {
+    "styled-components": "^5.3.5"
+  }
 }

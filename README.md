@@ -2,14 +2,14 @@
 
 A highly configurable Bubble UI React.js component, similar to the iconic Apple Watch app layout.
 
-[![NPM](https://img.shields.io/npm/v/react-bubble-ui.svg)](https://www.npmjs.com/package/react-bubble-ui) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-bubble-ui.svg)](https://www.npmjs.com/package/react-bubble-ui-v2) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-<img src="./example/public/demo.gif" style="border-radius: 30px"/>
+<img src="https://raw.githubusercontent.com/blakesanie/React-Bubble-UI/main/example/public/demo.gif" style="border-radius: 30px"/>
 
 ## Install
 
 ```bash
-npm install --save react-bubble-ui
+npm install --save react-bubble-ui-v2
 ```
 
 ## Interactive Demo
