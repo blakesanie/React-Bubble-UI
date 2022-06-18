@@ -324,7 +324,7 @@ export function Bubble(props: Props) {
                     } = getBubbleSize(i, j);
                     return (
                       <BubbleContainer
-                        key={`${comp}-${i}`}
+                        key={`${comp}-${j}`}
                         style={{
                           width: options.size,
                           height: options.size,
