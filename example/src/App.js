@@ -8,30 +8,30 @@ import DummyBubble from "./DummyBubble";
 
 const dummyBubbleLayoutOptions = {
   size: 80,
-  minSize: 10,
+  minsize: 10,
   gutter: 8,
-  provideProps: false,
-  numCols: 5,
-  fringeWidth: 80,
-  yRadius: 100,
-  xRadius: 100,
-  cornerRadius: 50,
-  showGuides: false,
+  provideprops: false,
+  numcols: 5,
+  fringewidth: 80,
+  yradius: 100,
+  xradius: 100,
+  cornerradius: 50,
+  showguides: false,
   compact: true,
   gravitation: 5,
 };
 
 const dimensionsExampleOptions = {
   size: 120,
-  minSize: 14,
+  minsize: 14,
   gutter: 8,
-  provideProps: false,
-  numCols: 6,
-  fringeWidth: 100,
-  yRadius: 120,
-  xRadius: 160,
-  cornerRadius: 60,
-  showGuides: true,
+  provideprops: false,
+  numcols: 6,
+  fringewidth: 100,
+  yradius: 120,
+  xradius: 160,
+  cornerradius: 60,
+  showguides: true,
   compact: false,
   gravitation: 0,
 };
@@ -56,23 +56,23 @@ export default function App(props) {
       },
       ref: useRef(null),
       range: {
-        start: "minSize",
+        start: "minsize",
         end: "Infinity",
       },
     },
     {
       type: "range",
-      optionKey: "minSize",
+      optionKey: "minsize",
       min: 5,
       max: 50,
       step: 1,
       unit: "px",
       desc: "The minimum diameter of a bubble, in pixels",
       options1: {
-        minSize: 5,
+        minsize: 5,
       },
       options2: {
-        minSize: 20,
+        minsize: 20,
       },
       ref: useRef(null),
       range: {
@@ -102,17 +102,17 @@ export default function App(props) {
     },
     {
       type: "range",
-      optionKey: "numCols",
+      optionKey: "numcols",
       min: 1,
       max: 10,
       step: 1,
       desc:
         "The number of columns into which bubbles are organized. Rows are composed accordingly",
       options1: {
-        numCols: 3,
+        numcols: 3,
       },
       options2: {
-        numCols: 10,
+        numcols: 10,
       },
       ref: useRef(null),
       range: {
@@ -122,7 +122,7 @@ export default function App(props) {
     },
     {
       type: "range",
-      optionKey: "xRadius",
+      optionKey: "xradius",
       min: 50,
       max: 400,
       step: 1,
@@ -130,10 +130,10 @@ export default function App(props) {
       desc:
         "The horizontal radius of the region where bubbles are at their maximum size, in pixels",
       options1: {
-        xRadius: 50,
+        xradius: 50,
       },
       options2: {
-        xRadius: 120,
+        xradius: 120,
       },
       ref: useRef(null),
       range: {
@@ -143,7 +143,7 @@ export default function App(props) {
     },
     {
       type: "range",
-      optionKey: "yRadius",
+      optionKey: "yradius",
       min: 50,
       max: 400,
       step: 1,
@@ -151,10 +151,10 @@ export default function App(props) {
       desc:
         "The vertical radius of the region where bubbles are at their maximum size, in pixels",
       options1: {
-        yRadius: 50,
+        yradius: 50,
       },
       options2: {
-        yRadius: 120,
+        yradius: 120,
       },
       ref: useRef(null),
       range: {
@@ -164,28 +164,28 @@ export default function App(props) {
     },
     {
       type: "range",
-      optionKey: "cornerRadius",
+      optionKey: "cornerradius",
       min: 0,
       max: 400,
       step: 1,
       unit: "px",
       desc:
-        "The amount by which the corners of the region where bubbles are at their maximum size are rounded, in pixels. If this value is equal to xRadius and yRadius, a circle inscribes the region",
+        "The amount by which the corners of the region where bubbles are at their maximum size are rounded, in pixels. If this value is equal to xradius and yradius, a circle inscribes the region",
       options1: {
-        cornerRadius: 0,
+        cornerradius: 0,
       },
       options2: {
-        cornerRadius: 100,
+        cornerradius: 100,
       },
       ref: useRef(null),
       range: {
         start: "0",
-        end: "min(xRadius, yRadius)",
+        end: "min(xradius, yradius)",
       },
     },
     {
       type: "range",
-      optionKey: "fringeWidth",
+      optionKey: "fringewidth",
       min: 20,
       max: 200,
       step: 1,
@@ -193,10 +193,10 @@ export default function App(props) {
       desc:
         "The width of the fringe, or region just outside the center where bubbles grow from their minimum to maximum size, in pixels",
       options1: {
-        fringeWidth: 40,
+        fringewidth: 40,
       },
       options2: {
-        fringeWidth: 130,
+        fringewidth: 130,
       },
       ref: useRef(null),
       range: {
@@ -226,14 +226,14 @@ export default function App(props) {
     },
     {
       type: "checkbox",
-      optionKey: "showGuides",
+      optionKey: "showguides",
       desc:
         "Whether or not the visual guides, including center region and fringe, are show over the bubbles. Useful when designing the bubble layout",
       options1: {
-        showGuides: false,
+        showguides: false,
       },
       options2: {
-        showGuides: true,
+        showguides: true,
       },
       ref: useRef(null),
     },
@@ -252,14 +252,14 @@ export default function App(props) {
     },
     {
       type: "checkbox",
-      optionKey: "provideProps",
+      optionKey: "provideprops",
       desc:
-        "Whether or not bubbleSize, distanceToCenter, maxSize, and minSize values are passed to corresponding children as props",
+        "Whether or not bubbleSize, distanceToCenter, maxSize, and minsize values are passed to corresponding children as props",
       options1: {
-        provideProps: false,
+        provideprops: false,
       },
       options2: {
-        provideProps: true,
+        provideprops: true,
       },
       ref: useRef(null),
     },
@@ -286,15 +286,15 @@ export default function App(props) {
 
   const [options, setOptions] = useState({
     size: 180,
-    minSize: 20,
+    minsize: 20,
     gutter: 8,
-    provideProps: true,
-    numCols: 6,
-    fringeWidth: 160,
-    yRadius: 130,
-    xRadius: 220,
-    cornerRadius: 50,
-    showGuides: false,
+    provideprops: true,
+    numcols: 6,
+    fringewidth: 160,
+    yradius: 130,
+    xradius: 220,
+    cornerradius: 50,
+    showguides: false,
     compact: true,
     gravitation: 5,
   });
@@ -546,26 +546,26 @@ export default function App(props) {
           style={{
             bottom: `50%`,
             left: `50%`,
-            width: dimensionsExampleOptions.xRadius,
+            width: dimensionsExampleOptions.xradius,
             borderBottom: `2px solid white`,
           }}
         >
-          xRadius
+          xradius
         </p>
         <p
           className="dimensionLabel"
           style={{
             bottom: `50%`,
             left: `50%`,
-            width: dimensionsExampleOptions.yRadius,
+            width: dimensionsExampleOptions.yradius,
             borderBottom: `2px solid white`,
             transformOrigin: `center bottom`,
             transform: `translate(-50%, -${
-              dimensionsExampleOptions.yRadius / 2
+              dimensionsExampleOptions.yradius / 2
             }px) rotate(90deg)`,
           }}
         >
-          yRadius
+          yradius
         </p>
         <p
           className="dimensionLabel"
@@ -573,14 +573,14 @@ export default function App(props) {
             bottom: `50%`,
             right: `50%`,
             boxSizing: "border-box",
-            transform: `translate(${dimensionsExampleOptions.xRadius}px, ${
-              dimensionsExampleOptions.yRadius -
-              dimensionsExampleOptions.cornerRadius
+            transform: `translate(${dimensionsExampleOptions.xradius}px, ${
+              dimensionsExampleOptions.yradius -
+              dimensionsExampleOptions.cornerradius
             }px)`,
             paddingRight: 5,
           }}
         >
-          cornerRadius
+          cornerradius
         </p>
         <p
           className="dimensionLabel"
@@ -590,11 +590,11 @@ export default function App(props) {
             borderTop: `2px solid white`,
             borderLeft: `2px dashed rgba(255,255,255,0.5)`,
             boxSizing: "border-box",
-            width: dimensionsExampleOptions.cornerRadius,
-            height: dimensionsExampleOptions.cornerRadius,
-            transform: `translate(${dimensionsExampleOptions.xRadius}px, ${
-              dimensionsExampleOptions.yRadius -
-              dimensionsExampleOptions.cornerRadius
+            width: dimensionsExampleOptions.cornerradius,
+            height: dimensionsExampleOptions.cornerradius,
+            transform: `translate(${dimensionsExampleOptions.xradius}px, ${
+              dimensionsExampleOptions.yradius -
+              dimensionsExampleOptions.cornerradius
             }px)`,
           }}
         ></p>
@@ -603,22 +603,22 @@ export default function App(props) {
           style={{
             bottom: `50%`,
             left: `50%`,
-            height: dimensionsExampleOptions.fringeWidth,
+            height: dimensionsExampleOptions.fringewidth,
             borderLeft: `2px solid white`,
             paddingLeft: 5,
-            marginBottom: dimensionsExampleOptions.yRadius,
+            marginBottom: dimensionsExampleOptions.yradius,
             transform: `translateX(-50%)`,
-            paddingTop: dimensionsExampleOptions.fringeWidth - 60,
+            paddingTop: dimensionsExampleOptions.fringewidth - 60,
             boxSizing: "border-box",
           }}
         >
-          fringeWidth
+          fringewidth
         </p>
         <p
           className="dimensionRegion"
           style={{
             top: `50%`,
-            left: `calc(50% - ${dimensionsExampleOptions.xRadius / 2 - 10}px`,
+            left: `calc(50% - ${dimensionsExampleOptions.xradius / 2 - 10}px`,
             transform: `translate(-50%, -50%)`,
           }}
         >
@@ -630,8 +630,8 @@ export default function App(props) {
           className="dimensionRegion"
           style={{
             top: `calc(50% + ${
-              dimensionsExampleOptions.yRadius +
-              dimensionsExampleOptions.fringeWidth / 2
+              dimensionsExampleOptions.yradius +
+              dimensionsExampleOptions.fringewidth / 2
             }px)`,
             left: `50%`,
             transform: `translate(-50%, -50%)`,
@@ -806,15 +806,15 @@ export default function App(props) {
 
 /*
 size: 200,
-    minSize: 20,
+    minsize: 20,
     gutter: 16.5,
-    provideProps: false,
-    numCols: 6,
-    fringeWidth: 100,
-    yRadius: 200,
-    xRadius: 200,
-    cornerRadius: 100,
-    showGuides: false,
+    provideprops: false,
+    numcols: 6,
+    fringewidth: 100,
+    yradius: 200,
+    xradius: 200,
+    cornerradius: 100,
+    showguides: false,
     compact: false,
     gravitation: 0,
 */
