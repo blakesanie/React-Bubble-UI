@@ -1,7 +1,32 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
+"use client";
+
+import React, { ReactElement, useLayoutEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 
-export const defaultOptions = {
+interface BubbleOptions {
+  size: number;
+  minSize: number;
+  gutter: number;
+  provideProps: boolean;
+  numCols: number;
+  fringeWidth: number;
+  yRadius: number;
+  xRadius: number;
+  cornerRadius: number;
+  showGuides: boolean;
+  compact: boolean;
+  gravitation: number;
+  shape?: "ellipse" | "rectangle";
+}
+
+interface BubbleSizeOutput {
+  bubbleSize: number;
+  translateX: number;
+  translateY: number;
+  distance: number;
+}
+
+export const defaultOptions: BubbleOptions = {
   size: 200,
   minSize: 20,
   gutter: 16,
@@ -16,15 +41,45 @@ export const defaultOptions = {
   gravitation: 0,
 };
 
-export default function BubbleElement(props) {
-  if (!props.children) {
-    return null;
-  }
-  let options = {};
-  Object.assign(options, defaultOptions);
-  Object.assign(options, props.options);
-  options.numCols = Math.min(options.numCols, props.children.length);
-  // console.log(options);
+interface BubbleElementProps {
+  children: React.ReactNode;
+  options?: Partial<BubbleOptions>;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+interface BubbleWrapperProps {
+  bubbleSize?: number;
+  distanceToCenter?: number;
+  maxSize?: number;
+  minSize?: number;
+  children: React.ReactNode;
+}
+
+const BubbleWrapper: React.FC<BubbleWrapperProps> = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  // You can use the props here as needed, or just render the children directly
+  // For demonstration, we're ignoring the props and just rendering children
+  return <>{children}</>;
+};
+
+const round = (number: number, decimalPlaces: number) => {
+  const factor = Math.pow(10, decimalPlaces);
+  return Math.round(number * factor) / factor;
+};
+
+const BubbleElement: React.FC<BubbleElementProps> = ({
+  children,
+  options: userOptions,
+  className,
+  style,
+}) => {
+  const options: BubbleOptions = { ...defaultOptions, ...userOptions };
+
+  options.numCols = Math.min(options.numCols, React.Children.count(children));
 
   const minProportion = options.minSize / options.size;
 
@@ -39,20 +94,23 @@ export default function BubbleElement(props) {
     (options.cornerRadius * (1.414 - 1)) / 1.414
   }px)`;
 
-  const scrollable = useRef(null);
+  const scrollable = useRef<HTMLDivElement>(null);
 
-  let rows = [];
-  var colsRemaining = 0;
-  var evenRow = true;
-  for (var i = 0; i < props.children.length; i++) {
-    if (colsRemaining == 0) {
-      colsRemaining = evenRow ? options.numCols - 1 : options.numCols;
-      evenRow = !evenRow;
-      rows.push([]);
+  const rows: ReactElement[][] = [];
+  let colsRemaining = 0;
+  let evenRow = true;
+
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child)) {
+      if (colsRemaining === 0) {
+        colsRemaining = evenRow ? options.numCols - 1 : options.numCols;
+        evenRow = !evenRow;
+        rows.push([]);
+      }
+      rows[rows.length - 1].push(child);
+      colsRemaining--;
     }
-    rows[rows.length - 1].push(props.children[i]);
-    colsRemaining--;
-  }
+  });
   if (rows.length > 1) {
     if (rows[rows.length - 1].length % 2 == rows[rows.length - 2].length % 2) {
       rows[rows.length - 1].push(<div></div>); // dummy bubble
@@ -62,10 +120,11 @@ export default function BubbleElement(props) {
   const [scrollTop, setScrollTop] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  const handleScroll = (e) => {
-    if (e.target.className) {
-      setScrollTop(e.target.scrollTop);
-      setScrollLeft(e.target.scrollLeft);
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const target = e.currentTarget; // Use currentTarget instead of target
+    if (target.className) {
+      setScrollTop(target.scrollTop);
+      setScrollLeft(target.scrollLeft);
     }
   };
 
@@ -74,24 +133,45 @@ export default function BubbleElement(props) {
   //   setElementHeight(container.current.clientHeight)
   // }
 
-  useLayoutEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+  // useLayoutEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
 
-    scrollable.current.scrollTo(
-      (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
-      (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2
-    );
-    return () => window.removeEventListener("scroll", handleScroll);
+  //   scrollable.current.scrollTo(
+  //     (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
+  //     (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2,
+  //   );
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+
+  useLayoutEffect(() => {
+    window.addEventListener("scroll", handleScroll as unknown as EventListener);
+    if (scrollable.current) {
+      scrollable.current.scrollTo(
+        (scrollable.current.scrollWidth - scrollable.current.clientWidth) / 2,
+        (scrollable.current.scrollHeight - scrollable.current.clientHeight) / 2
+      );
+    }
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        handleScroll as unknown as EventListener
+      );
   }, []);
 
-  const interpolate = (actualMin, actualMax, val, targetMin, targetMax) => {
+  const interpolate = (
+    actualMin: number,
+    actualMax: number,
+    val: number,
+    targetMin: number,
+    targetMax: number
+  ) => {
     return (
       ((val - actualMin) / (actualMax - actualMin)) * (targetMax - targetMin) +
       targetMin
     );
   };
 
-  const getBubbleSize = (row, col) => {
+  const getBubbleSize = (row: number, col: number): BubbleSizeOutput => {
     const yOffset =
       (options.size + options.gutter) * 0.866 * row -
       options.size +
@@ -111,7 +191,7 @@ export default function BubbleElement(props) {
     const distance = Math.sqrt(dx * dx + dy * dy);
     // let theta = Math.atan(dy / dx);
     // if (dx < 0) theta += Math.PI;
-    let out = {
+    const out = {
       bubbleSize: 1,
       translateX: 0,
       translateY: 0,
@@ -252,21 +332,19 @@ export default function BubbleElement(props) {
 
   return (
     <div
-      className={props.className}
+      className={className}
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        ...props.style,
+        ...style,
       }}
     >
       <div className={styles.container}>
-        {/* <p>{`scrollTop: ${scrollTop}`}</p>
-        <p>{`scrollLeft: ${scrollLeft}`}</p> */}
         <div
           className={styles.scrollable}
           ref={scrollable}
-          onScroll={handleScroll}
+          onScroll={(e) => handleScroll(e)}
         >
           <div
             className={styles.horizontalSpacer}
@@ -297,32 +375,40 @@ export default function BubbleElement(props) {
                   }}
                 >
                   {row.map((comp, j) => {
-                    const {
-                      bubbleSize,
-                      translateX,
-                      translateY,
-                      distance,
-                    } = getBubbleSize(i, j);
+                    const { bubbleSize, translateX, translateY, distance } =
+                      getBubbleSize(i, j);
+
+                    const style = {
+                      width: `${options.size}px`,
+                      height: `${options.size}px`,
+                      marginRight: `${options.gutter / 2}px`,
+                      marginLeft: `${options.gutter / 2}px`,
+                      transform: `translateX(${round(
+                        translateX,
+                        2
+                      )}px) translateY(${round(translateY, 2)}px) scale(${round(
+                        bubbleSize,
+                        2
+                      )})`,
+                    };
                     return (
                       <div
                         key={j}
                         className={styles.bubbleContainer}
-                        style={{
-                          width: options.size,
-                          height: options.size,
-                          marginRight: options.gutter / 2,
-                          marginLeft: options.gutter / 2,
-                          transform: `translateX(${translateX}px) translateY(${translateY}px) scale(${bubbleSize})`,
-                        }}
+                        style={style}
                       >
-                        {options.provideProps
-                          ? React.cloneElement(comp, {
-                              bubbleSize: bubbleSize * options.size,
-                              distanceToCenter: distance,
-                              maxSize: options.size,
-                              minSize: options.minSize,
-                            })
-                          : comp}
+                        {options.provideProps ? (
+                          <BubbleWrapper
+                            bubbleSize={bubbleSize * options.size}
+                            distanceToCenter={distance}
+                            maxSize={options.size}
+                            minSize={options.minSize}
+                          >
+                            {comp}
+                          </BubbleWrapper>
+                        ) : (
+                          comp
+                        )}
                       </div>
                     );
                   })}
@@ -385,4 +471,5 @@ export default function BubbleElement(props) {
       </div>
     </div>
   );
-}
+};
+export default BubbleElement;
